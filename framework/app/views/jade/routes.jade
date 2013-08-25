@@ -1,0 +1,113 @@
+//- Layout
+extends layouts/col1layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Crea contenido dinámico
+    hr
+
+//- Contenido principal
+block content
+    ul.breadcrumb
+        li
+            a(href="#/") Inicio
+            span.divider /
+        li.active Gestión de vistas
+
+    p En este entorno se utiliza 
+        a(href="http://angularjs.org/", title="Visitar la web de AngularJS en otra pestaña", target="_blank") AngularJS
+        | . Entre muchas de las ventajas que ofrece este framework MVC de javascript se encuentra la capacidad de crear aplicaciones web con una rica interacción y favorecer las URLs amigables.
+
+    p En esta sección se va a describir como funciona el servicio 
+        strong $routeProvider 
+        | de AngularJS que permite mostrar un contenido u otro y asignar lógica a esa parte de la vista en caso de ser necesario.
+
+    h2 Servicio $routeProvider
+    h3 index.jade
+    p Con el entorno se proporciona un fichero 
+        strong index.jade 
+        | (el cual genera su correspondiente .html) con el siguiente contenido.
+    pre
+        | !!! 5
+        | html(lang="es", class="no-js", ng-app="projectApp")
+        |     include includes/head
+        |     body(style="padding: 0;")
+        |         .container(ng-view)
+        |     include includes/scripts
+
+    p Este index es el tronco de la aplicación web y donde se va a cargar contenido. De este fichero se puede destacar lo siguiente:
+    dl
+        dt ng-app
+        dd Módulo de la aplicación. Esta directiva quiere decir que se va a usar AngularJS dentro del tag 
+            code html
+            | .
+        dt ng-view
+        dd Directiva de Angular que se encarga de cargar un contenido u otro. Recoge información del servicio 
+            code $routeProvider 
+            | del fichero 
+            strong app.js 
+            | que se proporciona. Cuando AngularJS detecta que una ruta cambia remplaza esta directiva por el contenido correspondiente.
+
+    h3 app.js
+    p Ahora vamos a echar un vistazo al fichero app.js y su servicio de enrutado.
+    pre
+        | 'use strict';
+        | angular.module('projectApp', [])
+        |     .config(function ($routeProvider) {
+        |         $routeProvider
+        |             .when('/', {
+        |                 templateUrl: 'views/html/home.html'
+        |             })
+        |             .when('/welcome', {
+        |                 templateUrl: 'views/html/welcome.html'
+        |             })
+        |             .when('/main', {
+        |                 templateUrl: 'views/html/main.html',
+        |                 controller: 'MainCtrl'
+        |             })
+        |             .when('/first-steps', {
+        |                 templateUrl: 'views/html/first-steps.html'
+        |             })
+        |             .when('/design', {
+        |                 templateUrl: 'views/html/design.html'
+        |             })
+        |             .when('/routes', {
+        |                 templateUrl: 'views/html/routes.html'
+        |             })
+        |             .when('/accessibility', {
+        |                 templateUrl: 'views/html/accessibility.html'
+        |             })
+        |             .otherwise({
+        |                 redirectTo: '/'
+        |             });
+        |     });
+
+    p Con servicio
+        code $routeProvider
+        | dada una 
+        stron ruta relativa 
+        | al sitio web hará diferentes cosas.
+        | En cada método 
+        code when
+        | se especifica una ruta relativa y se puede personaliza con diferentes opciones.
+        | Por otro lado en el método 
+        code otherwise
+        | se especifica qué hacer en caso de no haber cargado ninguna de las rutas anteriores.
+        | Este servicio favorece las 
+        strong rutas amigables 
+        | ya que la dirección mostrada en navegador es la que está dentro del 
+        code when
+        | .
+    dl
+        dt templateUrl
+        dd Especifica que la ruta de la plantilla a cargar.
+        dt controller
+        dd Especifica el controlador para esa vista. De este modo es posible agregar lógica a una plantilla.
+        dt redirectTo
+        dd Se proporciona una ruta a la que navegar.
+        dt resolve
+        dd Este objeto le dice avisa a AngularJS de que algo debe ser cargado antes de mostrar la plantilla al usuario.
+            | Es útil en caso de realizar peticiones al servidor.
+
+    p A continuación un ejemplo de enlace con una ruta relativa al sitio web.
+    pre a(href="#/main", title="Ir a main.html") Ejemplo de enlace relativo

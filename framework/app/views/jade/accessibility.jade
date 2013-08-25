@@ -1,0 +1,66 @@
+//- Layout
+extends layouts/col1layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Accesibilidad
+    hr
+
+//- Contenido principal
+block content
+    ul.breadcrumb
+        li
+            a(href="#/") Inicio
+            span.divider /
+        li.active Accesibilidad
+
+    h2 Crea contenido accesible
+    p Crear contenido accesible permite a cualquier tipo de persona independientemente de si padece alguna discapacidad poder navegar y acceder al contenido de una web.
+        | Las personas de avanzada edad también se ven beneficiades si una página web es accesible ya que con el paso de los años sus capacidades han ido mermando.
+        | Crear sitios web accesibles es también una forma de evitar discriminación hacia ese tipo de personas y para una empresa evita renunciar a usuarios potenciales.
+        | Del mismo modo favorece que las páginas web sean universables para todos, favorece la búsqueda contenido y obliga a estructurar correctamente el código de los desarrolladores.
+    section
+        article.bg-blue
+            h3 ¿Cómo favorece este entorno la accesibilidad?
+            .clearfix
+                .span11
+                    p Gracias a 
+                        strong AngularJS 
+                        | que permite 
+                        strong manipular el vocabulario HTML. 
+                        | Se ha hecho un análisis de las WCAG 2.0 en su nivel de conformidad A para que el desarrollador sea capaz de ver continuamente si su contenido es accesible.
+                .span10
+                    p Si el desarrollador incumple alguna pauta de las que se aplican en este entorno AngularJS modifica el DOM para agregar un icono de exclamación con el problema de accesibilidad encontrado.
+                .span1
+                    img(alt='Signo de exclamación "!"', src='images/warning.png')
+
+        article.bg-blue
+            h3 Consejos sobre accesibilidad
+            p A continuación se describen algunos consejos fundamentales para crear contenido accesible.
+                | Se recomienda visitar la web del W3C donde se describen las 
+                a(href='http://www.w3.org/TR/WCAG/', title="Visitar las WCAG 2.0 en otra pestaña", target="_blank") WCAG 2.0
+                | .
+            .clearfix
+                .span11
+                    ul
+                        li Agrega el atributo 
+                            code lang 
+                            | con el idioma de la página al tag 
+                            code HTML
+                            | . Así el idioma de la página puede ser detenerminado por herramientas de software.
+                        li Agrega el tag 
+                            code title
+                            | que describe la temática o propósito del sitio dentro del 
+                            code HEAD
+                            | .
+                        li Agrega contenido alternativo en elementos visuales. Por ejemplo en imágenes usa el atributo 
+                            code alt
+                            | con el texto alternativo a la imagen.
+                        li La información, estructura y relaciones comunicadas a través de la presentación pueden ser determinadas por software o están disponibles como texto.
+                        li El uso del color no se usa como único medio para transimitir información.
+                        li Todo el contenido operable de la web es accesible por teclado.
+                        li Las páginas web no contienen nada que destelle más de tres veces en un segundo, o el destello está por debajo del umbral de destello general y de destello rojo.
+                        li Cuando cualquier componente recibe el foco, no inicia ningún cambio en el contexto.
+                        li Al recibir entradas: El cambio de estado en cualquier componente de la interfaz de usuario no provoca automáticamente un cambio en el contexto a menos que el usuario haya sido advertido de ese comportamiento antes de usar el componente.
+                        li Identificación de errores: Si se detecta automáticamente un error en la entrada de datos, el elemento erróneo es identificado y el error se describe al usuario mediante un texto.
+                        li Se proporcionan etiquetas o instrucciones cuando el contenido requiere la introducción de datos por parte del usuario. 

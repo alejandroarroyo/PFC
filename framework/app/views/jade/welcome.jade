@@ -1,0 +1,20 @@
+//- Layout
+extends layouts/col1layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Bienvenido a su nuevo entorno
+    hr
+
+//- Contenido principal
+block content
+    section
+        article.bg-blue
+            .clearfix
+                .span7
+                    h2 Productividad
+                    h2 Accesibilidad
+                    h2 Aplicaciones web dinámicas
+                .span3
+                    a.thumbnail(href='/', title="Ir a la página de inicio")
+                        img(alt='Más información', src='images/moreInfo.png')

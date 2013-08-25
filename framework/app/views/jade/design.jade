@@ -1,0 +1,739 @@
+//- Layout
+extends layouts/col2layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Maqueta con JADE
+    hr
+
+//- Contenido principal
+block content
+    ul.breadcrumb
+        li
+            a(href="#/") Inicio
+            span.divider /
+        li.active Maquetación
+
+    p Para maquetar en este entorno se utiliza 
+        a(href="http://jade-lang.com/", title="Visitar la web de JADE en otra pestaña", target="_blank") JADE
+        | . Este preprocesador de HTML entre otros aspectos se caracteriza por proporcionar una sintaxis muy sencilla, herencia de plantillas y sentencias de control.
+    p En esta sección se va a hacer una revisión de los 
+        strong mixins 
+        | proporcionados para mejorar la productividad del desarrollador.
+        | Sin embargo el maquetador es libre de crear nuevos mixins acorde con las necesidades de su proyecto.
+    p También se va a describir cómo usar la 
+        strong herencia de plantillas 
+        | en JADE y se hará un repaso sobre como utilizar las que se proporcionan por defecto en este entorno.
+
+    h2#layouts Utiliza la herencia de plantillas
+    section.clearfix
+        h3 Plantillas
+        p Uno de los puntos fuertes de JADE es la forma que tiene de gestionar cómo se forman las regiones de cada plantilla.
+            | A continuación se va a explicar detalladamente cómo utilizar la herencia de plantillas en jade, cómo incluir contenido de otras plantillas y cómo crear regiones con contenido.
+
+        h4 Herencia de plantillas y regiones
+        p El fundamento de la herencia de plantilla se basa en los siguientes conceptos:
+            ol
+                li Crea una plantilla general.
+                li Define regiones en tu plantilla general. Cada región es heredada por otras sub-plantillas.
+                li Cada sub-plantilla rellena las regiones con contenido.
+        p La herencia de plantillas es ilimitada por lo que se puede heredar de tantas plantillas como se desee.
+
+        P Por lo general los sitios web tienen un par de formas de estructurar el contenido.
+            | Por ello la herencia de plantillas es muy útil ya que evita replicar código innecesariamente para estructurar cada vista.
+
+        p En este entorno se han creado los siguientes layouts para definir la estructura del sitio.
+        img(alt='Esquema de herencia de plantillas', src='images/layoutsScheme.png')
+        p
+            strong layout.jade
+            | : plantilla que define la estructura general de la página. Incluye los mixins, tag html, tag head, el footer y la carga de scripts.
+        pre.prettyprint
+            | include ../mixins/mixins
+            | include ../includes/head
+            | body
+            |     include ../includes/header
+            |     // CUERPO
+            | section.container
+            |     block pageHeader
+            |     block colLayout
+            |     include ../includes/footer
+            |     include ../includes/scripts
+        p
+            strong col1layout.jade
+            | : esta plantilla hereda el del layout general. Recupera las regiones definidas (blocks) y le agrega el contenido correspondiente para estructurar el contenido en 
+            strong una columna. 
+            | Además crea una nueva región "content" cuyo contenido será rellenado por la plantilla que herede de esta.
+        pre.prettyprint
+            | extends layout
+            | block pageHeader
+            | block colLayout
+            |     .row
+            |         .span12
+            |             block content
+        p
+            strong col2layout.jade
+            | : esta plantilla hereda el del layout general. Recuperda las regiones definidas (blocks) y le agrega el contenido correspondiente para estructurar el contenido en 
+            strong dos columnas. 
+            | Además crea dos nuevas regiones "content" y "sidebar" cuyo contenido será rellenado por la plantilla que herede de esta.
+        pre.prettyprint
+            | extends layout
+            | block pageHeader
+            | block colLayout
+            |     .row
+            |         .span8
+            |             block content
+            |         .span4
+            |             block sidebar
+
+        h5 Definición de términos
+        p A continuación se detallan las diferentes palabras reservadas de los conceptos que se acaban de ver:
+        ul
+            li
+                code extends
+                | : esta palabra reservada se usa para heredar una plantilla.
+            li
+                code block
+                | : esta palabra reservada se usa para heredar o crear una región.
+            li
+                code include
+                | : esta palabra reservada se usa para importar un .jade en cualquier parte de su plantilla.
+
+        h5 ¿Cómo creo una plantilla?
+        p Simplemente basta con crear un fichero *.jade en la carpeta "jade" del entorno.
+            | A continuación un ejemplo de una plantilla jade a dos columnas.
+        pre.prettyprint
+            | //- Layout
+            | extends layouts/col1layout
+            | 
+            | //- Encabezado de página
+            | block pageHeader
+            |     h1 Encabezado
+            |     hr
+            | //- Contenido principal
+            | block content
+            |     p Contenido principal
+            | //- Contenido adicional
+            | block sidebar
+            |     p Contenido adicional
+    hr
+
+    h2 Mixins de Jade
+    section.clearfix#images
+        h3 Imágenes
+        .bs-docs-example
+            mixin img("images/imageExample.png", "Imagen")
+            mixin img-custom-dimensions("images/imageExample.png", "Imagen", "150px", "75px", "img-circle")
+        pre.prettyprint
+            | mixin img("images/imageExample.png", "Imagen")
+            | mixin img-custom-dimensions("images/imageExample.png", "Imagen", "50px", "75px", "img-circle")
+
+        h4 Uso
+        p Por defecto este entorno contiene dos mixins para imágenes.
+
+        p El siguiente mixin se usa para generar una 
+            strong imagen:
+            br
+            code mixin img(imgSrc, imgAlt, imgClass)
+        ul
+            li
+                code imgSrc
+                |: Recibe la ruta de la imagen.
+            li
+                code imgAlt
+                |: Recibe el texto alternativo de la imagen.
+            li
+                code imgClass
+                |: Atributo opcional para agregar una o más clases a la imagen generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong imagen con dimensiones personalizdas: 
+            br
+            code mixin img-custom-dimensions(imgSrc, imgAlt, imgWitdh, imgHeight, imgClass)
+        ul
+            li
+                code imgSrc
+                |: Recibe la ruta de la imagen.
+            li
+                code imgAlt
+                |: Recibe el texto alternativo de la imagen.
+            li
+                code imgWitdh
+                |: Recibe el ancho de la imagen.
+            li
+                code imgHeight
+                |: Recibe el alto de la imagen.
+            li
+                code imgClass
+                |: Atributo opcional para agregar una o más clases a la imagen generada.
+
+    hr
+    section.clearfix#tables
+        h3 Tablas
+        .bs-docs-example
+            span.label.label-info Tabla básica
+            tableHeaders = ["Encabezado 1", "Encabezado 2", "Encabezado 3"]
+            tableThrows = [["Fila1 Celda1", "Fila1 Celda2", "Fila1 Celda3"],["Fila2 Celda1", "Fila2 Celda2", "Fila2 Celda3"],["Fila3 Celda1", "Fila3 Celda2", "Fila3 Celda3"]]
+            mixin table(tableHeaders, tableThrows, "table-bordered table-hover")
+            span.label.label-info Tabla con pie
+            tableFooters = ["Pie1", "Pie2", "Pie3"]
+            mixin table-with-footer(tableHeaders, tableThrows, tableFooters)
+
+        pre.prettyprint
+            | tableHeaders = ["Encabezado 1", "Encabezado 2", "Encabezado 3"]
+            | tableThrows = [["Fila1 Celda1", "Fila1 Celda2", "Fila1 Celda3"],["Fila2 Celda1", "Fila2 Celda2", "Fila2 Celda3"],["Fila3 Celda1", "Fila3 Celda2", "Fila3 Celda3"]]
+            | mixin table(tableHeaders, tableThrows, "table-bordered table-hover")
+            | 
+            | tableFooters = ["Pie1", "Pie2", "Pie3"]
+            | mixin table-with-footer(tableHeaders, tableThrows, tableFooters)
+        h4 Uso
+        p Por defecto este entorno contiene dos mixins para tablas.
+
+        p El siguiente mixin se usa para generar una 
+            strong tabla sin pie:
+            br
+            code mixin table(tableHeaders, tableThrows, tableClass)
+        ul
+            li
+                code tableHeaders
+                |: Recibe un array con los encabezados.
+            li
+                code tableThrows
+                |: Recibe una colección de arrays. Cada sub-array es una fila.
+            li
+                code tableClass
+                |: Atributo opcional para agregar una o más clases a la tabla generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong tabla con pie:
+            br
+            code mixin table(tableHeaders, tableThrows, tableFooters, tableClass)
+        ul
+            li
+                code tableHeaders
+                |: Recibe un array con los encabezados.
+            li
+                code tableThrows
+                |: Recibe una colección de arrays. Cada sub-array es una fila.
+            li
+                code tableFooters
+                |: RRecibe un array con los pies de la tabla
+            li
+                code tableClass
+                |: Atributo opcional para agregar una o más clases a la tabla generada.
+
+
+    hr
+    section.clearfix#lists
+        h3 Listas
+        .bs-docs-example
+            itemsList = ["Item uno", "Item dos", "Item tres"]
+            itemsListLinks = [["Item uno", "#"], ["Item dos", "#"]]
+            itemsDefinitionlist = [["Término uno", "Definición del primer término"], ["Término dos", "Definición del segundo término", "Otra definición del segundo término"]]
+
+            span.label.label-info Lista básica
+            mixin list(itemsList, "unstyled")
+
+            span.label.label-info Lista básica con enlaces
+            mixin list-links(itemsListLinks)
+
+            span.label.label-info Lista ordenada con enlaces
+            mixin ordered-list(itemsList)
+
+            span.label.label-info Lista ordenada con enlaces
+            mixin ordered-list-links(itemsListLinks)
+
+            span.label.label-info Lista de definición
+            mixin definition-list(itemsDefinitionlist)
+        pre.prettyprint
+            | itemsList = ["Item uno", "Item dos", "Item tres"]
+            | itemsListLinks = [["Item uno", "#"], ["Item dos", "#"]]
+            | itemsDefinitionlist = [["Término uno", "Definición del primer término"], ["Término dos", "Definición del segundo término", "Otra definición del segundo término"]]
+            | mixin list(itemsList, "unstyled")
+            | mixin list-links(itemsListLinks)
+            | mixin ordered-list(itemsList)
+            | mixin ordered-list-links(itemsListLinks)
+            | mixin definition-list(items)
+        h4 Uso
+        p Por defecto este entorno contiene cinco mixins relacionados con la generación de listas.
+        p El siguiente mixin se usa para generar una 
+            strong lista básica:
+            br
+            code mixin list(items, ulClass)
+        ul
+            li
+                code items
+                | : Contine un array con los elementos de la lista.
+            li
+                code ulClass
+                |: Atributo opcional para agregar una o más clases a la lista generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong lista básica cuyos elementos son nlaces: 
+            br
+            code mixin list-links(items, ulClass)
+        ul
+            li
+                code items
+                | : Contine una colección de arrays con cada elemento. El primer elemento de cada array es el texto que se muestra en la vista y el segundo la URL a la que referencia.
+            li
+                code ulClass
+                |: Atributo opcional para agregar una o más clases a la lista generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong lista ordenada:
+            br
+            code mixin ordered-list(items, olClass)
+        ul
+            li
+                code items
+                | : Contine un array con los elementos de la lista.
+            li
+                code olClass
+                |: Atributo opcional para agregar una o más clases a la lista generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong lista básica cuyos elementos son nlaces: 
+            br
+            code mixin ordered-list-links(items, olClass)
+        ul
+            li
+                code items
+                | : Contine una colección de arrays con cada elemento. El primer elemento de cada array es el texto que se muestra en la vista y el segundo la URL a la que referencia.
+            li
+                code olClass
+                |: Atributo opcional para agregar una o más clases a la lista generada.
+
+        p El siguiente mixin se usa para generar una 
+            strong lista de definición:
+            br
+            code mixin definition-list(items, dlClass)
+        ul
+            li
+                code items
+                | : Contine una colección de arrays. Cada sub-array se organiza de la siguiente forma: El primer elemento es el término a definir y los sucesivos son sus definciones.
+            li
+                code dlClass
+                |: Atributo opcional para agregar una o más clases a la lista generada.
+
+
+
+    hr
+    section.clearfix
+        h3#forms Formularios
+        h4 Input de texto básicos
+        .bs-docs-example
+            form(name="formBasicInput")
+                mixin input-basic("name", "Introduzca su nombre", "Nombre: ")
+                mixin input-basicCustom("lastName", "Introduzca sus apellidos", "Apellidos: ", "", "span4")
+        pre.prettyprint
+            | form(name="formBasicInput")
+            |   mixin input-basic("Input básico", "Introduzca su nombre", "Nombre: ")
+            |   mixin input-basicCustom("Input básico personalizable", "Introduzca sus apellidos", "Apellidos: ", "", "span4")
+        h4 Uso
+        p Por defecto este entorno contiene dos mixins para crear inputs de texto básicos.
+        p El siguiente mixin se usa para generar un 
+            strong input de texto básico:
+            br
+            code mixin input-basic(inputId, placeholder, text)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code placeholder
+                |: "placeholder" del input.
+            li
+                code text
+                |: Texto del label.
+
+        p El siguiente mixin se usa para generar una 
+            strong input de texto básico personalizable:
+            br
+            code mixin input-basicCustom(inputId, placeholder, text, customLabelClass, customInputClass)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code placeholder
+                |: "placeholder" del input.
+            li
+                code text
+                |: Texto del label.
+            li
+                code customLabelClass
+                |: Atributo opcional para agregar una o más clases al label.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al input.
+        hr
+        h4 Textarea
+        .bs-docs-example
+            form(name="formBasicTextarea")
+                mixin textarea-basic("description", "Introduzca descripción", "Descripción")
+        pre.prettyprint
+            | form(name="formBasicTextarea")
+            |    mixin textarea-basic("description", "Introduzca descripción", "Descripción")
+        h4 Uso
+
+        p El siguiente mixin se usa para generar un 
+            strong textarea:
+            br
+            code mixin textarea-basic(textareaId, placeholder, text, rows, cols)
+        ul
+            li
+                code textareaId
+                | : Atributo "for" del label e "id" del textarea.
+            li
+                code placeholder
+                |: "placeholder" del textarea.
+            li
+                code text
+                |: Texto del label.
+            li
+                code rows
+                |: Filas del textarea.
+            li
+                code cols
+                |: Columnas del textarea.
+        hr
+        h4 Checkboxes y radios
+        .bs-docs-example
+            form(name="formCheckboxsRadios")
+                mixin checkbox-basic("payForm", "Efectivo")
+                mixin checkbox-basicCustom("payForm", "Tarjeta")
+                mixin radio-basic("civilStatus", "Casado")
+                mixin radio-basicCustom("civilStatus", "Soltero")
+
+        pre.prettyprint
+            | form(name="formCheckboxsRadios")
+            |     mixin checkbox-basic("payForm", "Efectivo")
+            |     mixin checkbox-basicCustom("payForm", "Tarjeta")
+            |     mixin radio-basic("civilStatus", "Casado")
+            |     mixin radio-basicCustom("civilStatus", "Soltero")
+
+        h4 Uso
+        p Por defecto este entorno contiene varios mixins para crear checkboxes y radios.
+        p El siguiente mixin se usa para generar un 
+            strong input checkbox básico:
+            br
+            code mixin checkbox-basic(inputId, text)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code text
+                |: Texto del label.
+
+        p El siguiente mixin se usa para generar un 
+            strong input checkbox personalizable:
+            br
+            code mixin checkbox-basicCustom(inputId, text, customLabelClass, customInputClass)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code text
+                |: Texto del label.
+            li
+                code customLabelClass
+                |: Atributo opcional para agregar una o más clases al label.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al input.
+
+        p El siguiente mixin se usa para generar un 
+            strong input radio básico:
+            br
+            code mixin radio-basic(inputId, text)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code text
+                |: Texto del label.
+
+        p El siguiente mixin se usa para generar un 
+            strong input radio personalizable:
+            br
+            code mixin radio-basicCustom(inputId, text, customLabelClass, customInputClass)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code text
+                |: Texto del label.
+            li
+                code customLabelClass
+                |: Atributo opcional para agregar una o más clases al label.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al input.
+
+        hr
+        h4 Select
+        .bs-docs-example
+            form(name="formSelect")
+                selectOptions = ["Ninguno", "Uno", "Dos", "Más de dos"]
+                mixin select-basic("sons", "Número de hijos:", selectOptions)
+                mixin select-basicCustom("ownership", "Pisos en propiedad:", selectOptions, "", "span4")
+                mixin select-multiple("cars", "Coches en propiedad:", selectOptions)
+        pre.prettyprint
+            | form(name="formSelect")
+            |     selectOptions = ["Ninguno", "Uno", "Dos", "Más de dos"]
+            |     mixin select-basic("sons", "Número de hijos:", selectOptions)
+            |     mixin select-basicCustom("ownership", "Pisos en propiedad:", selectOptions, "", "span4")
+            |     mixin select-multiple("cars", "Coches en propiedad:", selectOptions)
+        h4 Uso
+        p Por defecto este entorno contiene varios mixins para crear selects.
+        p El siguiente mixin se usa para generar un 
+            strong select básico:
+            br
+            code mixin select-basic(selectId, text, items)
+        ul
+            li
+                code selectId
+                | : Atributo "for" del label e "id" del select.
+            li
+                code text
+                |: Texto del label.
+            li
+                code items
+                |: Array con las opciones del select.
+
+        p El siguiente mixin se usa para generar un 
+            strong select personalizable:
+            br
+            code mixin select-basicCustom(selectId, text, items, customLabelClass, customSelectClass)
+        ul
+            li
+                code selectId
+                | : Atributo "for" del label e "id" del select.
+            li
+                code text
+                |: Texto del label.
+            li
+                code items
+                |: Array con las opciones del select.
+            li
+                code customLabelClass
+                |: Atributo opcional para agregar una o más clases al label.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al select.
+
+        p El siguiente mixin se usa para generar un 
+            strong select muliple:
+            br
+            code mixin select-multiple(selectId, text, items, customLabelClass, customSelectClass)
+        ul
+            li
+                code selectId
+                | : Atributo "for" del label e "id" del select.
+            li
+                code text
+                |: Texto del label.
+            li
+                code items
+                |: Array con las opciones del select.
+            li
+                code customLabelClass
+                |: Atributo opcional para agregar una o más clases al label.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al select.
+        hr
+        h4 Formularios horizontal
+        .bs-docs-example
+            form(name="formHorizontal", class="form-horizontal")
+                mixin input-horizontal("postalCode", "C. P.", "Código postal: ", "", "input-mini")
+        pre.prettyprint
+            | form(name="formHorizontal")
+            |     mixin input-horizontal("postalCode", "C. P.", "Código postal: ", "", "input-mini")
+        h4 Uso
+        p Por defecto este entorno contiene un mixin para crear inputs de texto en formularios horizontales.
+        p El siguiente mixin se usa para generar un 
+            strong input de texto en formularios horizontales personalizable:
+            br
+            code mixin input-horizontal(inputId, placeholder, text, customControlGroup, customInputClass)
+        ul
+            li
+                code inputId
+                | : Atributo "for" del label e "id" del input.
+            li
+                code placeholder
+                |: "placeholder" del input.
+            li
+                code text
+                |: Texto del label.
+            li
+                code customControlGroup
+                |: Atributo opcional para agregar una clase al contendor del label e input.
+            li
+                code customInputClass
+                |: Atributo opcional para agregar una o más clases al input.
+        hr
+
+        h4 Componentes avanzados
+        .bs-docs-example
+            form(name="formAdvanced1")
+                mixin input-prepended("$", "minMoney")
+                mixin input-appended("$", "maxMoney")
+                mixin input-combined("$", "finalMoney", ",000")
+                mixin input-button-prepended("Cerrar sesión", "disconnect")
+                mixin input-button-appended("Iniciar sesión", "loggin")
+            form(name="formAdvanced2", class="form-search")
+                mixin input-prepended-rounded("Enviar", "send")
+                mixin input-appended-rounded("Aceptar", "accept", "", "btn btn-inverse")
+        pre.prettyprint
+            | form(name="formAdvanced")
+            |     mixin input-prepended("$", "minMoney")
+            |     mixin input-appended("$", "maxMoney")
+            |     mixin input-combined("$", "finalMoney", ",000")
+            |     mixin input-button-appended("Iniciar sesión", "loggin")
+            |     mixin input-button-prepended("Cerrar sesión", "disconnect")
+            | form(name="formAdvanced2", class="form-search")
+            |     mixin input-prepended-rounded("Enviar", "send")
+            |     mixin input-appended-rounded("Aceptar", "accept", "", "btn-inverse")
+        h4 Uso
+
+        p Por defecto este entorno contiene varios mixins para crear inputs especiales.
+        p El siguiente mixin se usa para generar un 
+            strong input con addon al principio del campo:
+            br
+            code mixin input-prepended(addon, inputName, wrapperClass)
+        ul
+            li
+                code addon
+                | : Recibe el addon que se inserta al inicio del input.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code wrapperClass
+                |: Parámetro opcional para agregar una clase al contenedor del input.
+
+        p El siguiente mixin se usa para generar un 
+            strong input con addon al final del campo:
+            br
+            code mixin input-appended(addon, inputName, wrapperClass)
+        ul
+            li
+                code addon
+                | : Recibe el addon que se inserta al final del input.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code wrapperClass
+                |: Parámetro opcional para agregar una clase al contenedor del input.
+
+        p El siguiente mixin se usa para generar un 
+            strong input con addon al principio y al final del campo:
+            br
+            code mixin input-combined(firstAddon, inputName, secondAddon, wrapperClass)
+        ul
+            li
+                code firstAddon
+                | : Recibe el addon que se inserta al principio del input.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code secondAddon
+                | : Recibe el addon que se inserta al final del input.
+            li
+                code wrapperClass
+                |: Parámetro opcional para agregar una clase al contenedor del input.
+
+        p El siguiente mixin se usa para generar un 
+            strong input con un botón al principio del campo:
+            br
+            code mixin input-button-prepended(text, inputName, wrapperClass)
+        ul
+            li
+                code text
+                | : Recibe el texto del botón.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code wrapperClass
+                |: Parámetro opcional para agregar una clase al contenedor del input y el botón.
+
+        p El siguiente mixin se usa para generar un 
+            strong input con un botón al final del campo:
+            br
+            code mixin input-button-appended(text, inputName, wrapperClass)
+        ul
+            li
+                code text
+                | : Recibe el texto del botón.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code wrapperClass
+                |: Parámetro opcional para agregar una clase al contenedor del input y el botón.
+
+        p El siguiente mixin se usa para generar un 
+            strong input redondeado con un botón al principio del campo:
+            br
+            code mixin input-prepended-rounded(buttonText, inputName, customInputClass, customButtonClass)
+        ul
+            li
+                code buttonText
+                | : Recibe el texto del botón.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code customInputClass
+                |: Parámetro opcional para agregar una clase al input.
+            li
+                code customButtonClass
+                |: Parámetro opcional para agregar una clase al botón.
+
+        p El siguiente mixin se usa para generar un 
+            strong input redondeado con un botón al final del campo:
+            br
+            code mixin input-appended-rounded(buttonText, inputName, customInputClass, customButtonClass)
+        ul
+            li
+                code buttonText
+                | : Recibe el texto del botón.
+            li
+                code inputName
+                |: Atributo "name" del input.
+            li
+                code customInputClass
+                |: Parámetro opcional para agregar una clase al input.
+            li
+                code customButtonClass
+                |: Parámetro opcional para agregar una clase al botón.
+        hr
+
+
+//- Contenido adicional
+block sidebar
+    .clearfix
+        ul.nav.nav-list.bs-docs-sidenav.affix(style="margin-top:143px")
+            li
+                a(href="#/design#layouts")
+                    | Herencia de plantillas
+            li
+                a(href="#/design#images")
+                    | Mixins de imágenes
+            li
+                a(href="#/design#tables")
+                    | Mixins de tablas
+            li
+                a(href="#/design#lists")
+                    | Mixins de listas
+            li
+                a(href="#/design#forms")
+                    | Mixins de formularios

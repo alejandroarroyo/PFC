@@ -1,0 +1,33 @@
+//- Layout
+extends layouts/col2layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Encabezado H1
+    hr
+
+//- Contenido principal
+block content
+    h2 Encabezado H2
+
+    section
+        article.hero-unit
+            h3 Encabezado H3
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Entesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+            h3 Encabezado H4
+            p Vivamus scelerisque tincidunt nibh vitae gravida. Im vitae, pulvinar scelerisque magna.
+
+        article.hero-unit
+            h3 Encabezado H3
+            p Vivamus scelerisque tincidunt nibh vitae gravida. Im vitae, pulvinar scelerisque magna.
+            h4 Encabezado h4
+            p Vivamus scelerisque tincidunt nibh vitae gravida. Im vitae, pulvinar scelerisque magna.
+            mixin img("images/imageExample.png", "imagen")
+
+//- Contenido adicional
+block sidebar
+    itemsListLinks = [["Enlace uno", "#"], ["Enlace dos", "#"], ["Enlace tres", "#"], ["Enlace cuatro", "#"]]
+    mixin list-links(itemsListLinks, "unstyled")
+    hr
+    mixin list-links(itemsListLinks, "unstyled")

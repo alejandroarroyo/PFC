@@ -1,0 +1,135 @@
+!!! 5
+html.no-js(lang="es")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+        title Primeros pasos del entorno
+        meta(name="description", content="")
+        meta(name="viewport", content="width=device-width")
+        link(rel="stylesheet", href="styles/main.css")
+
+    body(style="padding: 0;")
+        section.container
+            h1 Instalación
+            .row
+                .span12
+                    h2 ¿Por dónde empezar?
+                    section
+                        article.bg-blue
+                            h3 Requisitos
+                            p Para ejecutar este entorno el usuario deberá instalar las siguientes herramientas.
+                            h4 NodeJS
+                            .clearfix
+                                .span8
+                                    p Node es un entorno de programación en la capa del servidor que usa javascript.
+                                    p Incluye multitud de módulos que permiten extender su funcionalidad.
+                                    p Se incluye en la carpeta "resources" del entorno aunque también se puede descagar de 
+                                        a(href='http://nodejs.org/', title="Abrir la web de NodeJS en otra pestaña", target="_blank") su web oficial. 
+                                        | Durante la instalación permite la posible de 
+                                        strong agregar Node al PATH 
+                                        | del sistema, marcar esa opción.
+                                .span2
+                                    a.thumbnail(href='http://www.w3.org/TR/WCAG/', title="Ir a la web de NodeJS")
+                                        img(alt='NodeJS', src='images/nodeJS.png')
+
+
+                            h4 GruntJS
+                            .clearfix
+                                .span8
+                                    p Grunt es un gestor de tareas el cual es instalable por medio de un módulo de NodeJS.
+                                    p Introducir en una consola la siguiente línea: 
+                                        code npm install -g grunt-cli
+                                    p Grunt permite automatizar multitud de tareas que mejoran la productividad.
+                                        | Por ejemplo es capaz de renderizar CSS y SCSS o HTML en JADE indicando las rutas de origen y destino.
+                                        | También es capaz de realizar la minificación de ficheros e incluso es capaz de actualizar automáticamente el navegador cuando surgen cambios en determinados ficheros, gracias a su tarea Watch.
+                                    p Con este entorno se proporcionan algunas tareas configuradas pero el desarrollador es libre de su edición a traves del fichero 
+                                        strong Gruntfile.js
+                                        | .
+                                .span2
+                                    a.thumbnail(href="http://gruntjs.com/getting-started", title="Visitar la web de GruntJS en otra pestaña", target="_blank")
+                                        img(alt='GruntJS', src='images/gruntJS.png')
+
+                            h4 Ruby
+                            .clearfix
+                                .span8
+                                    p Ruby es un lenguaje de programación interpretado, reflexivo y orientado a objetos. 
+                                        | Incluye un gestor de paquetes que permite instalar programas o librerías de Ruby. 
+                                        | Esto es interesante porque para usar 
+                                        strong Compass 
+                                        | es necesario instalar Ruby.
+                                    p La instalación de Ruby y Compass es muy sencilla:
+                                    ol
+                                        li Se incluye en la carpeta "resources" del entorno aunque también se puede descagar 
+                                            a(href='http://www.ruby-lang.org/es/', title="Abrir la web de Ruby en otra pestaña", target="_blank") de su web oficial 
+                                            | Durante la instalación permite la posible de 
+                                            strong agregar Ruby al PATH 
+                                            | del sistema, marcar esa opción.
+                                        li Desde una consola de comandos introducir la siguiente línea para instalar Compass: 
+                                            code gem install compass
+                                .span2
+                                    a.thumbnail(href="http://www.ruby-lang.org/es/", title="Visitar la web de Ruby en otra pestaña", target="_blank")
+                                        img(alt='Ruby', src='images/ruby.png')
+
+
+                    section
+                        article.bg-blue
+                            h3 Ejecución del entorno
+                            p Con los requisitos cumplidos ya es posible arrancar el entorno de desarrollo y ponerse manos a la obra.
+                            h4 Arranca el entorno
+                            .clearfix
+                                .span10
+                                    p Hay dos formas de abrir el entorno en el navegador con la estructurá básica que se proporciona.
+                                    ul
+                                        li Ejecutar el script 
+                                            strong START.bat 
+                                            | que ejecuta la tarea de Grunt, 
+                                            code grunt server
+                                            |.
+                                        li La tarea de Grunt que arranca el entorno es 
+                                            code grunt server
+                                            |. Escribiendo esa sentencia por consola dentro de la estructura de carpetas del entorno se ejecutará el proyecto.
+
+                            h4 A trabajar
+                            .clearfix
+                                .span8
+                                    p Es necesario un editor de código a elegir por el usuario con el que empezar a escribir código. 
+                                        | A continuación se muestran algunas recomendaciones.
+                                    ul
+                                        li
+                                            strong Sublime Text 2
+                                            ul
+                                                li Este editor se proporciona con el entorno en su versión portable.
+                                                li Permite extender su funcionalidad con plugins a través de su "Package control".
+                                                li Por defecto se han incluido para este entorno multitud de plugins para trabajar con JADE, SCSS y Angular.
+                                                li También se han incluido otras herramientas auxiliares como JSLint o Tralling spaces para favorecer un código limpio.
+                                        li
+                                            strong Webstorm
+                                            ul
+                                                li Es uno de los mejores editores en la actualidad.
+                                                li Es un IDE perfecto para el desarrollo Front-end con una cantidad de snippets increible que favorecen la productividad.
+                                                li Este IDE es de pago.
+                                .span2
+                                    a.thumbnail(href='http://www.sublimetext.com/', title="Visitar la web de Sublime text en otra pestaña", target="_blank")
+                                        img(alt='Sublime Text 2', src='images/sublimeText2.png')
+                                .span2
+                                    a.thumbnail(href='http://www.jetbrains.com/webstorm/', title="Visitar la web de Web Storm en otra pestaña", target="_blank")
+                                        img(alt='Web Storm', src='images/webStorm.gif')
+
+                    section
+                        article.bg-blue
+                            h3 ¿Cómo se desarrolla aquí?
+                            h4 Pasos para desarrollar
+                            .clearfix
+                                img(alt='Esquema básico del entorno', src='images/basicScheme.png')
+                            h4 ¿Cómo está organizado el entorno?
+                            .clearfix
+                                img(alt='Organización de los ficheros del entorno', src='images/files.png', class="img-polaroid")
+
+                    footer.footer.well.well-small.muted
+                        p Entorno de desarrollo Front-end.
+                        p Conjunto de herramientas para mejorar la accesibilidad y la productividad en la creación de aplicaciones web.
+                        p Basado en Yeoman, GruntJS, JADE, AngularJS y Twitter Bootstrap.
+                        br
+                        p Proyecto fin de grado:
+                        p
+                            strong Alejandro Arroyo Duque

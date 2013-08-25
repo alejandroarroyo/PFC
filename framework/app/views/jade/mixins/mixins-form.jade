@@ -1,0 +1,98 @@
+mixin input-basic(inputId, placeholder, text)
+    label(for='#{inputId}') #{text}
+    input(id='#{inputId}', type='text', name='#{inputId}', placeholder='#{placeholder}')
+
+mixin input-basicCustom(inputId, placeholder, text, customLabelClass, customInputClass)
+    label(for='#{inputId}', class='#{customLabelClass}') #{text}
+    input(id='#{inputId}', type='text', name='#{inputId}', placeholder='#{placeholder}', class='#{customInputClass}')
+
+mixin textarea-basic(textareaId, placeholder, text, rows, cols)
+    label(for='#{textareaId}') #{text}
+    textarea(id='#{textareaId}', name='#{textareaId}', placeholder='#{placeholder}', rows='#{rows}', cols='#{cols}')
+
+mixin checkbox-basic(inputId, text)
+    label.checkbox
+        input(type='checkbox', value='#{text}', name='#{inputId}', id='#{inputId}')
+        | #{text}
+
+mixin checkbox-basicCustom(inputId, text, customLabelClass, customInputClass)
+    label.checkbox(class='#{customLabelClass}')
+        input(type='checkbox', value='#{text}', name='#{inputId}', id='#{inputId}', class='#{customInputClass}')
+        | #{text}
+
+mixin radio-basic(inputId, text)
+    label.radio
+        input(type='radio', value='#{text}', name='#{inputId}', id='#{inputId}')
+        | #{text}
+
+mixin radio-basicCustom(inputId, text, customLabelClass, customInputClass)
+    label.radio(class='#{customLabelClass}')
+        input(type='radio', value='#{text}', name='#{inputId}', id='#{inputId}', class='#{customInputClass}')
+        | #{text}
+
+mixin input-horizontal(inputId, placeholder, text, customControlGroup, customInputClass)
+    .control-group(class='#{customControlGroup}')
+        label.control-label(for='#{inputId}') #{text}
+        .controls
+            input(id='#{inputId}', type='text', name='#{inputId}', placeholder='#{placeholder}', class='#{customInputClass}')
+
+mixin select-basic(selectId, text, items)
+    label(for='#{selectId}') #{text}
+    select(id='#{selectId}', name='#{selectId}')
+        for item in items
+            option= item
+
+mixin select-basicCustom(selectId, text, items, customLabelClass, customSelectClass)
+    label(for='#{selectId}', class='#{customLabelClass}') #{text}
+    select(id='#{selectId}', name='#{selectId}', class='#{customSelectClass}')
+        for item in items
+            option= item
+
+mixin select-multiple(selectId, text, items, customLabelClass, customSelectClass)
+    label(for='#{selectId}') #{text}
+    select(id='#{selectId}', name='#{selectId}', multiple='multiple')
+        for item in items
+            option(value=item)= item
+
+mixin input-prepended(addon, inputName, wrapperClass)
+    .input-prepend(class='#{wrapperClass}')
+        label
+            span.add-on #{addon}
+            input#prependedInput.span2(type='text', name='#{inputName}')
+
+mixin input-appended(addon, inputName, wrapperClass)
+    .input-append(class='#{wrapperClass}')
+        label
+            input#appendedInput.span2(type='text', name='#{inputName}')
+            span.add-on #{addon}
+
+mixin input-appended-rounded(buttonText, inputName, customInputClass, customButtonClass)
+    .input-append
+        label
+            input.span2.search-query(type='text', name='#{inputName}', class='#{customInputClass}')
+            button.btn(type='submit', class='#{customButtonClass}') #{buttonText}
+
+mixin input-prepended-rounded(buttonText, inputName, customInputClass, customButtonClass)
+    .input-prepend
+        label
+            button.btn(type='submit', class='#{customButtonClass}') #{buttonText}
+            input.span2.search-query(type='text', name='#{inputName}', class='#{customInputClass}')
+
+mixin input-combined(firstAddon, inputName, secondAddon, wrapperClass)
+    .input-prepend.input-append(class='#{wrapperClass}')
+        label
+            span.add-on #{firstAddon}
+            input#appendedPrependedInput.span2(name='#{inputName}', type='text')
+            span.add-on #{secondAddon}
+
+mixin input-button-appended(text, inputName, wrapperClass)
+    .input-append(class='#{wrapperClass}')
+        label
+            input#appendedInputButton.span2(type='text', name='#{inputName}')
+            button.btn(type='button') #{text}
+
+mixin input-button-prepended(text, inputName, wrapperClass)
+    .input-prepend(class='#{wrapperClass}')
+        label
+            button.btn(type='button') #{text}
+            input#prependedInputButton.span2(type='text', name='#{inputName}')

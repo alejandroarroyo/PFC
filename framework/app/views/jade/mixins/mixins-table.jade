@@ -1,0 +1,27 @@
+mixin table(tableHeaders, tableThrows, tableClass)
+    table.table(class='#{tableClass}')
+        thead
+            tr
+                for tableHeader in tableHeaders
+                    th= tableHeader
+        tbody
+            for tableThrow in tableThrows
+                tr
+                    for item in tableThrow
+                        td= item
+
+mixin table-with-footer(tableHeaders, tableThrows, tableFooters, tableClass)
+    table.table(class='#{tableClass}')
+        thead
+            tr
+                for tableHeader in tableHeaders
+                    th= tableHeader
+        tbody
+            for tableThrow in tableThrows
+                tr
+                    for item in tableThrow
+                        td= item
+        tfoot
+            tr
+                for tableFooter in tableFooters
+                    td= tableFooter

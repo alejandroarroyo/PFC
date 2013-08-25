@@ -1,0 +1,92 @@
+//- Layout
+extends layouts/col1layout
+
+//- Encabezado de página
+block pageHeader
+    h1 Conozca el entorno
+    hr
+
+//- Contenido principal
+block content
+    ul.breadcrumb
+        li.active Inicio
+    h2 ¿Por qué es tan innovador?
+
+    section
+        article.bg-blue
+            h3 Descubra una nueva forma de trabajar
+            h4 Accesibilidad
+            .clearfix
+                ul.span8
+                    li WCAG 2.0 en su nivel de conformidad A.
+                    li Si incumple alguna pauta será avisado al momento.
+                .span2
+                    a.thumbnail(href='http://www.w3.org/TR/WCAG/', title="Visitar las WCAG 2.0 en otra pestaña", target="_blank")
+                        img(alt='WCAG 2.0', src='images/W3C.png')
+
+            h4 Flujo de trabajo innovador
+            .clearfix
+                ul.span8
+                    li Tecnologías con las que crear aplicaciones web actuales.
+                    li Entorno construido con Yeoman.
+                    li Herramientas para optimizar su productividad.
+                .span2
+                    a.thumbnail(href="http://yeoman.io/", title="Visitar la web de Yeoman en otra pestaña", target="_blank")
+                        img(alt='Yeoman', src='images/yeoman.png')
+
+        article.bg-blue
+            h3 Tecnologías
+            h4 Twitter Bootstrap
+            .clearfix
+                ul.span8
+                    li Framework de desarrollo front-end con el que crear sitios web increibles.
+                    li Versión para desarrolladores con ficheros SCSS.
+                .span2
+                    a.thumbnail(href="http://twitter.github.io/bootstrap/index.html", title="Visitar Twitter Bootstrap en otra pestaña", target="_blank")
+                        img(alt='Twitter Bootstrap', src='images/twitterBootstrap.jpg')
+
+            h4 SASS &amp; Compass
+            .clearfix
+                ul.span8
+                    li SASS y Compass extienden CSS con grandes ventajas que ayudan a crear estilos de forma más productiva.
+                    li Anida clases, crea mixins de SASS y crea un código de estilos estructurado y legible.
+                    li Usted usa SCSS y el entorno genera el CSS correspondiente.
+                .span2
+                    a.thumbnail(href="http://sass-lang.com/", title="Visitar web de SASS en otra pestaña", target="_blank")
+                        img(alt='SASS', src='images/SASS.gif')
+                    a.thumbnail(href="http://compass-style.org/", title="Visitar web de Compass en otra pestaña", target="_blank")
+                        img(alt='Compass', src='images/compass.png')
+
+            h4 JADE
+            .clearfix
+                ul.span8
+                    li Preprocesador HTML con una sencilla sintaxis y multitud de ventajas.
+                    li Utilice mixins de JADE para crear componentes.
+                    li Utilice layouts de JADE para organizar el contenido de forma sencilla.
+                    li Usted usa JADE y el entorno generará los HTML.
+                .span2
+                    a.thumbnail(href="http://jade-lang.com/", title="Visitar la web de JADE en otra pestaña", target="_blank")
+                        img(alt='JADE', src='images/jade.png')
+
+            h4 AngularJS
+            .clearfix
+                ul.span8
+                    li Utilice este framework MVC para crear sorprendentes aplicaciones web.
+                    li Directivas para manipular el vocabulario HTML.
+                    li Controladores para agregar lógica a sus desarrollos.
+                    li Use servicios para hacer peticiones al sevidor o lo que usted quiera.
+                    li Filtros para agregar clases a sus vistas de forma dinámica.
+                    li Utilice el servicio $routeProvider para crear URLs amigables y mucho más.
+                .span2
+                    a.thumbnail(href="http://angularjs.org/", title="Visitar la web de AngularJS en otra pestaña", target="_blank")
+                        img(alt='AngularJS', src='images/angularJS.png')
+
+            h4 GruntJS
+            .clearfix
+                ul.span8
+                    li Gestor para automatizar todo tipo de tareas.
+                    li La tarea Watch le permite vigilar ciertos ficheros y ver los cambios en vivo en el navegador.
+                    li Cambie los JADE, SCSS o lo que usted desee y vea como se actualiza el navegador.
+                .span2
+                    a.thumbnail(href="http://gruntjs.com/getting-started", title="Visitar la web de GruntJS en otra pestaña", target="_blank")
+                        img(alt='GruntJS', src='images/gruntJS.png')

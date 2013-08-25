@@ -1,0 +1,39 @@
+<head><meta content="text/html;" http-equiv="content-type" charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Proyecto fin de carrera</title><meta name="description" content=""><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="styles/main.css"></head><body><!-- CABECERA--><header><div class="navbar navbar-inverse"><div class="navbar-inner"><a href="#/" class="brand">Inicio</a><ul class="nav"><li><a href="#/first-steps">Primeros pasos</a></li><li><a href="#/design">Maquetación</a></li><li><a href="#/routes">Gestión de vistas</a></li><li><a href="#/accessibility">Accesibilidad</a></li></ul><ul class="nav pull-right"><li><a href="http://twitter.github.io/bootstrap/index.html">Bootstrap</a></li></ul></div></div></header><!-- CUERPO--></body><section class="container"><h1>Crea contenido dinámico</h1><hr><div class="row"><div class="span12"><ul class="breadcrumb"><li><a href="#/">Inicio</a><span class="divider">/</span></li><li class="active">Gestión de vistas</li></ul><p>En este entorno se utiliza <a href="http://angularjs.org/" title="Visitar la web de AngularJS en otra pestaña" target="_blank">AngularJS</a>. Entre muchas de las ventajas que ofrece este framework MVC de javascript se encuentra la capacidad de crear aplicaciones web con una rica interacción y favorecer las URLs amigables.</p><p>En esta sección se va a describir como funciona el servicio <strong>$routeProvider </strong>de AngularJS que permite mostrar un contenido u otro y asignar lógica a esa parte de la vista en caso de ser necesario.</p><h2>Servicio $routeProvider</h2><h3>index.jade</h3><p>Con el entorno se proporciona un fichero <strong>index.jade </strong>(el cual genera su correspondiente .html) con el siguiente contenido.</p><pre>!!! 5
+html(lang=&quot;es&quot;, class=&quot;no-js&quot;, ng-app=&quot;projectApp&quot;)
+    include includes/head
+    body(style=&quot;padding: 0;&quot;)
+        .container(ng-view)
+    include includes/scripts</pre><p>Este index es el tronco de la aplicación web y donde se va a cargar contenido. De este fichero se puede destacar lo siguiente:</p><dl><dt>ng-app</dt><dd>Módulo de la aplicación. Esta directiva quiere decir que se va a usar AngularJS dentro del tag <code>html</code>.</dd><dt>ng-view</dt><dd>Directiva de Angular que se encarga de cargar un contenido u otro. Recoge información del servicio <code>$routeProvider </code>del fichero <strong>app.js </strong>que se proporciona. Cuando AngularJS detecta que una ruta cambia remplaza esta directiva por el contenido correspondiente.</dd></dl><h3>app.js</h3><p>Ahora vamos a echar un vistazo al fichero app.js y su servicio de enrutado.</p><pre>'use strict';
+angular.module('projectApp', [])
+    .config(function ($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'views/html/home.html'
+            })
+            .when('/welcome', {
+                templateUrl: 'views/html/welcome.html'
+            })
+            .when('/main', {
+                templateUrl: 'views/html/main.html',
+                controller: 'MainCtrl'
+            })
+            .when('/first-steps', {
+                templateUrl: 'views/html/first-steps.html'
+            })
+            .when('/design', {
+                templateUrl: 'views/html/design.html'
+            })
+            .when('/routes', {
+                templateUrl: 'views/html/routes.html'
+            })
+            .when('/accessibility', {
+                templateUrl: 'views/html/accessibility.html'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    });</pre><p>Con servicio<code>$routeProvider</code>dada una <stron>ruta relativa </stron>al sitio web hará diferentes cosas.
+En cada método <code>when</code>se especifica una ruta relativa y se puede personaliza con diferentes opciones.
+Por otro lado en el método <code>otherwise</code>se especifica qué hacer en caso de no haber cargado ninguna de las rutas anteriores.
+Este servicio favorece las <strong>rutas amigables </strong>ya que la dirección mostrada en navegador es la que está dentro del <code>when</code>.</p><dl><dt>templateUrl</dt><dd>Especifica que la ruta de la plantilla a cargar.</dd><dt>controller</dt><dd>Especifica el controlador para esa vista. De este modo es posible agregar lógica a una plantilla.</dd><dt>redirectTo</dt><dd>Se proporciona una ruta a la que navegar.</dd><dt>resolve</dt><dd>Este objeto le dice avisa a AngularJS de que algo debe ser cargado antes de mostrar la plantilla al usuario.
+Es útil en caso de realizar peticiones al servidor.</dd></dl><p>A continuación un ejemplo de enlace con una ruta relativa al sitio web.</p><pre>a(href=&quot;#/main&quot;, title=&quot;Ir a main.html&quot;) Ejemplo de enlace relativo</pre></div></div><!-- FOOTER--><footer class="footer well well-small muted"><p>Entorno de desarrollo Front-end.</p><p>Conjunto de herramientas para mejorar la accesibilidad y la productividad en la creación de aplicaciones web.</p><p>Basado en Yeoman, GruntJS, JADE, AngularJS y Twitter Bootstrap.</p><br><p>Proyecto fin de grado:</p><p><strong>Alejandro Arroyo Duque</strong></p></footer><script src="components/angular/angular.js"></script><script src="components/angular-resource/angular-resource.js"></script><script src="components/angular-cookies/angular-cookies.js"></script><script src="components/angular-sanitize/angular-sanitize.js"></script><script src="scripts/jquery-1.9.1.js"></script><script src="scripts/app.js"></script><script src="scripts/controllers/main.js"></script><script src="scripts/directives/projectDirectives.js"></script></section>

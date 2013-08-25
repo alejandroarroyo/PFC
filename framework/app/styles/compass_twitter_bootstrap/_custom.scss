@@ -1,0 +1,29 @@
+//
+// Errors
+// --------------------------------------------------
+
+
+// Base class
+.accesibilityError {
+  position: absolute;
+  top: 0px;
+  background: url('../img/warning.png') no-repeat;
+  background-color: $errorBackground;
+  background-size: 30px 30px;
+  background-position-x: 5px;
+  background-position-y: 2px;
+  font-size: 12px;
+  text-indent: 30px;
+}
+
+// Background blue
+.bg-blue {
+    padding: 30px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: inherit;
+    background-color: rgb(218, 233, 243);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}

@@ -1,0 +1,28 @@
+mixin list(items, ulClass)
+    ul(class='#{ulClass}')
+        for item in items
+            li= item
+
+mixin list-links(items, ulClass)
+    ul(class='#{ulClass}')
+        for item in items
+            li
+                a(href=item[1])= item[0]
+
+mixin ordered-list(items, olClass)
+    ol(class='#{olClass}')
+        for item in items
+            li= item
+
+mixin ordered-list-links(items, olClass)
+    ol(class='#{olClass}')
+        for item in items
+            li
+                a(href=item[1])= item[0]
+
+mixin definition-list(items, dlClass)
+    dl(class='#{dlClass}')
+        for item in items
+            dt= item[0]
+            - for (var i=1; i<item.length; i++)
+                dd= item[i]
