@@ -1,5 +1,6 @@
+# Proyecto Fin de Grado
 
-# Entorno de desarrollo para la movilidad de la Web accesible a multidispositivos
+## Entorno de desarrollo para la movilidad de la Web accesible a multidispositivos
 
 Debido al constante avance tecnológico en productos electrónicos, como ordenadores, móviles, tablets, smartTV... etc. Surge la necesidad de crear sitios web que tenga movilidad a diferentes dispositivos, mejorando la experiencia de usuario y el acceso a la información. 
 
@@ -9,4 +10,8 @@ Los desarrollos de sitios web en la actualidad utilizan frameworks de desarrollo
 
 En este proyecto se proporciona un entorno de trabajo o framework de desarrollo front-end que cumpla con criterios de accesibilidad siguiendo la normativa. Además, se utilizan tecnologías complementarias con las que se agilice el proceso de desarrollo web extendiendo la potencia del entorno. El entorno se proporciona a través de un sitio web donde se da el acceso a la tecnología del entorno junto con documentación.
 
+> Autor: Alejandro Arroyo Duque
 
+> Directora: Lourdes Moreno López
+
+> Universidad Carlos III de Madrid
