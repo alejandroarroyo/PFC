@@ -1,6 +1,6 @@
 # Proyecto Fin de Grado
 
-## Entorno de desarrollo para la movilidad de la Web accesible a multidispositivos
+## Entorno de desarrollo front-end con requisitos de accesibilidad basado en Bootstrap
 
 Debido al constante avance tecnológico en productos electrónicos, como ordenadores, móviles, tablets, smartTV... etc. Surge la necesidad de crear sitios web que tenga movilidad a diferentes dispositivos, mejorando la experiencia de usuario y el acceso a la información. 
 
