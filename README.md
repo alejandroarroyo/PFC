@@ -15,3 +15,14 @@ En este proyecto se proporciona un entorno de trabajo o framework de desarrollo 
 > Directora: Lourdes Moreno López
 
 > Universidad Carlos III de Madrid
+
+## Uso
+
+1. Instalar NodeJS con el instalador de su página oficial: http://nodejs.org/
+2. Con NodeJs instalado. Instalar GruntJS escribiendo en un terminal: `npm install -g grunt-cli`
+
+3. Instalar Ruby con el instalador de su página oficial: https://www.ruby-lang.org/es/
+4. Con Ruby instalado. Instalar Compass introduciendo en un terminal: `gem install compass`
+
+5. Descargar este proyecto.
+6. Abrir un terminal en la raiz del proyecto y ejecutar: `grunt server`
